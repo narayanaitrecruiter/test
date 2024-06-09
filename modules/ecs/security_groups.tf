@@ -75,3 +75,4 @@ resource "aws_security_group_rule" "alb_cloudfront_https_ingress_only" {
   to_port           = 443
   type              = "ingress"
 }
+

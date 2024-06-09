@@ -96,7 +96,7 @@ variable "memory" {
 variable "container_definitions_file" {
   description = "Path to the container definitions file"
   type        = string
-  default     = "modules/ecs/task-definitions/task-def1.json"
+  default     = "modules/ecs/task-definitions/auth.json"
 }
 
 variable "task_definition_family" {
@@ -178,3 +178,22 @@ variable "subnet_ids" {
   type = list(string)
 }
 
+
+
+variable "container_definitions_file1" {
+  description = "Path to the container definitions file"
+  type        = string
+  default     = "modules/ecsservice/task-definitions/paymment.json"
+}
+
+variable "task_definition_family1" {
+  description = "Family name of the ECS task definition"
+  type        = string
+  default     = "payment"
+}
+
+variable "cluster_id" {
+  description = "ID of the ECS cluster"
+  type        = string
+  default     = null  
+}

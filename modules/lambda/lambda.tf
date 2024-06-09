@@ -28,12 +28,12 @@ resource "aws_iam_role_policy_attachment" "lambda_role_policy" {
 
 # Create Lambda function
 resource "aws_lambda_function" "qa_function" {
-  filename      = "./lambda_function_payload.zip" # Replace with your actual zip file
+  filename      = "${path.module}/lambda_function_payload.zip" # Replace with your actual zip file
   function_name = "qa_function"
   role          = aws_iam_role.lambda_role.arn
   handler       = "lambda_function.lambda_handler"
 
-  source_code_hash = filebase64sha256("lambda_function_payload.zip") # Replace with your actual zip file
+  source_code_hash = filebase64sha256("${path.module}/lambda_function_payload.zip") # Replace with your actual zip file
 
   runtime = "python3.8"
 

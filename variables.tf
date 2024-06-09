@@ -130,7 +130,7 @@ variable "target_capacity" {
 variable "container_port" {
   description = "Port of the container"
   type        = number
-  default     = 3000
+  default     = 80
 }
 
 variable "cpu_units" {
@@ -141,7 +141,7 @@ variable "cpu_units" {
 
 variable "memory" {
   description = "Amount of memory in MB for a single ECS task"
-  default     = 256
+  default     = 128
   type        = number
 }
 
@@ -228,3 +228,23 @@ variable "eks_cluster_name" {
   type        = string
   default     = "qa-eks"
 }
+
+
+
+########################################################################################################################
+## Variables for ECS-Service and task definitions.
+########################################################################################################################
+
+# variable "aws_ecs_service_configuration" {
+#   type = map(object({
+#     desired_count          = optional(number, 2),
+#     task_definition_family = optional(string, ""),
+#     launch_type            = optional(string, "EC2"),
+#     container_port         = optional(number, 80),
+#     container_definitions  = optional(string, ""),
+#     memory                 = optional(number, 128),
+#     cpu                    = optional(number, 128),
+
+#   }))
+# }
+

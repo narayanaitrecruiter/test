@@ -37,7 +37,3 @@ variable "environment" {
   default     = "QA-cluster"
   type        = string
 }
-
-variable "" {
-  
-}

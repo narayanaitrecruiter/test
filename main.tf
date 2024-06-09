@@ -1,14 +1,12 @@
 
 module "vpc" {
-  source     = "./modules/vpc"
+  source = "./modules/vpc"
 }
 
 module "ecs" {
-  source    = "./modules/ecs"
-  vpc_id    = module.vpc.vpc_id
+  source     = "./modules/ecs"
+  vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.subnet_ids
-
-  
 }
 
 module "eks" {
@@ -18,15 +16,16 @@ module "eks" {
 }
 
 module "rds" {
-  source    = "./modules/rds"
-  vpc_id    = module.vpc.vpc_id
+  source     = "./modules/rds"
+  vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.subnet_ids
 }
 
 module "lambda" {
-  source    = "./modules/lambda"
+  source = "./modules/lambda"
 }
 
 module "ecr" {
-  source    = "./modules/ecr"
+  source = "./modules/ecr"
 }
+

@@ -5,7 +5,7 @@
 resource "aws_ecs_service" "service" {
   name                               = "${var.namespace}_ECS_Service_${var.task_definition_family}"
   iam_role                           = aws_iam_role.ecs_service_role.arn
-  cluster                            = aws_ecs_cluster.default.id
+  cluster                            = var.cluster_id
   task_definition                    = aws_ecs_task_definition.default.arn
   desired_count                      = var.ecs_task_desired_count
   deployment_minimum_healthy_percent = var.ecs_task_deployment_minimum_healthy_percent
@@ -36,9 +36,6 @@ resource "aws_ecs_service" "service" {
   }
 }
 
-output "ecs_service_name" {
-  value = aws_ecs_service.service.name
-}
 
 ########################################################################################################################
 ## Creates ECS Task Definition

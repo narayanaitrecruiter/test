@@ -5,15 +5,15 @@ resource "aws_s3_bucket" "s301" {
   acl    = "private"
 }
 
-resource "aws_s3_bucket" "s302" {
-  bucket = "s302"
-  acl    = "private"
-}
+# resource "aws_s3_bucket" "s302" {
+#   bucket = "s302"
+#   acl    = "private"
+# }
 
-resource "aws_s3_bucket" "s303" {
-  bucket = "s303"
-  acl    = "private"
-}
+# resource "aws_s3_bucket" "s303" {
+#   bucket = "s303"
+#   acl    = "private"
+# }
 
 # Create the IAM roles for the CloudFront distributions
 resource "aws_iam_role" "cloudfront_role" {

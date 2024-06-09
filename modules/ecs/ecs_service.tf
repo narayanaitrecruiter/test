@@ -91,7 +91,7 @@ resource "aws_ecs_task_definition" "default1" {
   }
 }
 
-resource "aws_ecs_service" "service" {
+resource "aws_ecs_service" "service1" {
   name                               = "${var.namespace}_ECS_Service_${var.task_definition_family1}"
   iam_role                           = aws_iam_role.ecs_service_role.arn
   cluster                            = var.cluster_id

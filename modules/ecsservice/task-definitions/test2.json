@@ -1,0 +1,29 @@
+[
+    {
+        "name": "auth",
+        "image": "httpd:latest",
+        "cpu": 512,
+        "memory": 256,
+        "essential": true,
+        "portMappings": [
+            {
+                "containerPort": 8080,
+                "hostPort": 8080
+            }
+        ],
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "/ecs/service",
+                "awslogs-region": "us-east-1",
+                "awslogs-stream-prefix": "myapp"
+            }
+        },
+        "environment": [
+            {
+                "name": "ENV_VAR_NAME",
+                "value": "env_var_value"
+            }
+        ]
+    }
+]

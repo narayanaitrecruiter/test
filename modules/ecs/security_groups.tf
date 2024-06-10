@@ -8,19 +8,11 @@ resource "aws_security_group" "ec2" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description     = "Allow ingress traffic from ALB on HTTP on ephemeral ports"
-    from_port       = 1024
-    to_port         = 65535
-    protocol        = "tcp"
-    security_groups = [aws_security_group.alb.id]
-  }
-
-  ingress {
-    description     = "Allow SSH ingress traffic from bastion host"
-    from_port       = 22
-    to_port         = 22
-    protocol        = "tcp"
-    security_groups = [aws_security_group.bastion_host.id]
+    description = "Allow all ingress traffic"
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -41,7 +33,7 @@ resource "aws_security_group" "ec2" {
 ########################################################################################################################
 
 resource "aws_security_group" "alb" {
-  name        = "${var.namespace}_ALB_SecurityGroup"
+  name        = "${var.namespace}_ALB_SecurityGroup-new"
   description = "Security group for ALB"
   vpc_id      = var.vpc_id
   
@@ -75,4 +67,3 @@ resource "aws_security_group_rule" "alb_cloudfront_https_ingress_only" {
   to_port           = 443
   type              = "ingress"
 }
-

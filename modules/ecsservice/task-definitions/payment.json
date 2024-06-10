@@ -1,5 +1,5 @@
-
-[{
+[
+    {
     "family": "my-task-family",
     "networkMode": "bridge",
     "containerDefinitions": [
@@ -32,4 +32,4 @@
       }
     ]
   }
-]  
+]

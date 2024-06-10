@@ -29,7 +29,7 @@ resource "aws_security_group" "bastion_host" {
 }
 
 resource "aws_instance" "bastion_host" {
-  ami                         = data.aws_ami.amazon_linux_2.id
+  ami                         = data.aws_ssm_parameter.ecs_node_ami.value
   instance_type               = "t3.micro"
   subnet_id                   = var.subnet_ids[0]
   associate_public_ip_address = true

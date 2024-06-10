@@ -2,25 +2,8 @@
 ## Get most recent AMI for an ECS-optimized Amazon Linux 2 instance
 ########################################################################################################################
 
-data "aws_ami" "amazon_linux_2" {
-  most_recent = true
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  filter {
-    name   = "owner-alias"
-    values = ["amazon"]
-  }
-
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-ecs-hvm-*-x86_64-ebs"]
-  }
-
-  owners = ["amazon"]
+data "aws_ssm_parameter" "ecs_node_ami" {
+  name = "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended/image_id"
 }
 
 ########################################################################################################################
@@ -29,7 +12,7 @@ data "aws_ami" "amazon_linux_2" {
 
 resource "aws_launch_template" "ecs_launch_template" {
   name                   = "${var.namespace}_EC2_LaunchTemplate"
-  image_id               = data.aws_ami.amazon_linux_2.id
+  image_id               = data.aws_ssm_parameter.ecs_node_ami.value
   instance_type          = var.instance_type
   key_name               = "ireland" # Replace with your key pair name
   user_data              = base64encode(data.template_file.user_data.rendered)
@@ -47,6 +30,7 @@ resource "aws_launch_template" "ecs_launch_template" {
     name = var.environment
   }
 }
+
 
 data "template_file" "user_data" {
   template = file("${path.module}/user_data.sh")

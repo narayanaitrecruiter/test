@@ -1,3 +1,13 @@
+# The module VPC will create a vpc and subnet as this is called in the main.tf. 
+# The output of the vpc creation is vpc_id and subnet_ids.
+# Then we are passing the vpc ids and subnet values from vpc to ECS, RDS, and other modules. 
+
+# the values will be taken fromm the main.tf.. if you dont declare any values, then it will fetch from the default variables declared in the module. 
+# Module is the standard folder which has commplete structure to deploy everything... 
+# You can do or play anything using these modules in the main.tf.
+# this is the folder which you have...
+# i have split the ECS module into ECS and  ecs service. 
+
 
 module "vpc" {
   source = "./modules/vpc"
@@ -19,6 +29,7 @@ module "rds" {
   source     = "./modules/rds"
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.subnet_ids
+  aurorapassword = "testingaurora@password"
 }
 
 module "lambda" {
@@ -29,3 +40,33 @@ module "ecr" {
   source = "./modules/ecr"
 }
 
+
+
+/* ------------------------------ AUTH SERVICE ------------------------------ */
+module "auth-ecs-service" {
+  source  = "./modules/ecsservice"
+  subnet_ids = module.vpc.subnet_ids
+  vpc_id = module.vpc.vpc_id
+  cluster_id = module.ecs-cluster.ecs_cluster_id
+
+  container_port = 80
+  host_port = 81
+  task_definition_family = "auth"
+  container_image = "httpd:latest"
+  }
+
+/* ----------------------------- PAYMENT SERVICE ---------------------------- */
+
+module "payment-ecs-service" {
+  source  = "./modules/ecsservice"
+  subnet_ids = module.vpc.subnet_ids
+  vpc_id = module.vpc.vpc_id
+  cluster_id = module.ecs-cluster.ecs_cluster_id
+
+  container_port = 80
+  host_port = 80
+  task_definition_family = "payment"
+  container_image = "nginx:latest"
+  }
+
+  

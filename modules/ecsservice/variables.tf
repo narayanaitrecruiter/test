@@ -93,19 +93,28 @@ variable "memory" {
 }
 
 
-variable "container_definitions_file" {
-  description = "Path to the container definitions file"
-  type        = string
-  default     = "modules/ecs/task-definitions/task-def1.json"
-}
+
 
 variable "task_definition_family" {
   description = "Family name of the ECS task definition"
   type        = string
-  default     = "my-task-family"
 }
 
+variable "cluster_id" {
+  description = "ECS cluster name"
+  type        = string
+  default     = null
+  
+}
 
+variable "host_port" {
+  description = "EC2 host port"
+}
+
+variable "container_image" {  
+  description = "container image"
+  type        = string
+}
 ########################################################################################################################
 ## Cloudwatch
 ########################################################################################################################
@@ -168,6 +177,7 @@ variable "environment" {
 
 variable "vpc_id" {
   description = "default value for vpc"
+  //default = "non-prod-vpc"
   type = string
   
 }
@@ -176,4 +186,6 @@ variable "subnet_ids" {
   description = "default value for subnet"
   type = list(string)
 }
+
+
 

@@ -3,7 +3,7 @@
 ########################################################################################################################
 
 resource "aws_alb" "alb" {
-  name            = "${lower(var.namespace)}-alb"
+  name            = "${lower(var.namespace)}-alb-${var.task_definition_family}"
   security_groups = [aws_security_group.alb.id]
   subnets         = var.subnet_ids
 
@@ -84,8 +84,8 @@ resource "aws_alb_listener_rule" "https_listener_rule" {
 ########################################################################################################################
 
 resource "aws_alb_target_group" "service_target_group" {
-  name                 = "${var.namespace}-TargetGroup"
-  port                 = 80
+  name                 = "${var.namespace}-TargetGroup-${var.task_definition_family}"
+  port                 = var.host_port
   protocol             = "HTTP"
   vpc_id               = var.vpc_id
   deregistration_delay = 5

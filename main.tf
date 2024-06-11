@@ -8,6 +8,8 @@
 # this is the folder which you have...
 # i have split the ECS module into ECS and  ecs service. 
 # for the cloudfront change the bucket name wherever necessary.
+# update the zone names in the VPC module /variables.tf and in the provider.tf file.
+
 
 module "vpc" {
   source = "./modules/vpc"

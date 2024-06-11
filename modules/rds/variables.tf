@@ -27,7 +27,7 @@ variable "aurorapassword" {
 variable "postgresusername" {
   description = "Password for the Aurora database"
   type        = string
-  default = "irelandadmin"
+  default = "admin"
 }
 
 variable "postgrespassword" {
@@ -39,7 +39,7 @@ variable "postgrespassword" {
 variable "mysqlusername" {
   description = "Password for the Aurora database"
   type        = string
-  default = "irelandadmin"
+  default = "admin"
 }
 
 variable "mysqlpassword" {
@@ -52,5 +52,12 @@ variable "availability_zones" {
   description = "Availability zones to use"
   type        = list
   default     = ["us-west-2a"]  
+  
+}
+
+variable "engine_version_redis" {
+  description = "Redis engine version"
+  type        = string
+  default     = "6.x"
   
 }

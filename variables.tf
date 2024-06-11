@@ -25,7 +25,7 @@ variable "environment" {
 
 variable "region" {
   description = "AWS region"
-  default     = "eu-central-1"
+  default     = "us-west-2"
   type        = string
 }
 

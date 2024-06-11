@@ -9,11 +9,14 @@
 # i have split the ECS module into ECS and  ecs service. 
 
 
+
 module "vpc" {
   source = "./modules/vpc"
+
 }
 
-module "ecs" {
+
+module "ecs-cluster" {
   source     = "./modules/ecs"
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.subnet_ids
@@ -29,7 +32,11 @@ module "rds" {
   source     = "./modules/rds"
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.subnet_ids
-  aurorapassword = "testingaurora@password"
+  # for aurora password -The password must be between 8 and 41 characters long, and contain at least one uppercase letter, one lowercase letter, and one number.
+  aurorapassword = "Testingaurorapassword1"
+  mysqlusername = "admin"
+  postgresusername = "admin"
+  #engine_version    = "6.2.6"
 }
 
 module "lambda" {
@@ -68,5 +75,3 @@ module "payment-ecs-service" {
   task_definition_family = "payment"
   container_image = "nginx:latest"
   }
-
-  

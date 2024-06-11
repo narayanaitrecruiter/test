@@ -45,6 +45,7 @@ resource "aws_rds_cluster" "qa_postgres" {
   vpc_security_group_ids   = [aws_security_group.rds_security_group_aurora.id]
   db_subnet_group_name    = aws_db_subnet_group.qa_aurora_subnet_group.name
   engine_mode              = "provisioned"
+  skip_final_snapshot     = true
   # scaling_configuration {
   #   auto_pause               = true
   #   max_capacity             = 1

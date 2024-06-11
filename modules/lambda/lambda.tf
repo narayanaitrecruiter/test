@@ -31,11 +31,9 @@ resource "aws_lambda_function" "qa_function" {
   filename      = "${path.module}/lambda_function_payload.zip" # Replace with your actual zip file
   function_name = "qa_function"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "lambda_function.lambda_handler"
-
+  handler       = "test.lambda_handler"      # Replace with your actual handler
   source_code_hash = filebase64sha256("${path.module}/lambda_function_payload.zip") # Replace with your actual zip file
-
-  runtime = "python3.8"
+  runtime = "python3.9"
 
   environment {
     variables = {

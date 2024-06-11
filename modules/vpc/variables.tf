@@ -24,8 +24,8 @@ variable "az_count" {
 variable "availability_zones" {
   description = "Availability zones to use"
   type        = list(string)
-  default     = ["us-west-2a", "us-west-2b", "us-west-2c"]  
-  
+  default     = ["us-west-2a", "us-west-2b", "us-west-2c"]
+
 }
 
 ########################################################################################################################
@@ -36,7 +36,7 @@ variable "namespace" {
   description = "Namespace for the resources"
   default     = "QA-cluster"
   type        = string
-  
+
 }
 
 variable "environment" {

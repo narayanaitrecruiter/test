@@ -13,6 +13,8 @@ resource "aws_subnet" "PublicSubnet1"{
   vpc_id            = aws_vpc.non_prod_vpc.id
   cidr_block        = var.public_subnet_cidrs[0]
   availability_zone = var.availability_zones[0]
+   map_public_ip_on_launch = true
+ 
   tags = {
     Name    = "publicsubnet1"
     Project = "QA-subnets"
@@ -22,6 +24,8 @@ resource "aws_subnet" "PublicSubnet2" {
   vpc_id            = aws_vpc.non_prod_vpc.id
   cidr_block        = var.public_subnet_cidrs[1]
   availability_zone = var.availability_zones[1]
+  
+  map_public_ip_on_launch = true
   tags = {
     Name    = "publicsubnet2"
     Project = "qa-subnets"
@@ -32,6 +36,8 @@ resource "aws_subnet" "PublicSubnet3" {
   vpc_id            = aws_vpc.non_prod_vpc.id
   cidr_block        = var.public_subnet_cidrs[2]
   availability_zone = var.availability_zones[2]
+   map_public_ip_on_launch = true
+ 
   tags = {
     Name    = "publicsubnet3"
     Project = "qa-subnets"

@@ -1,7 +1,7 @@
 
 # Create the S3 buckets
-resource "aws_s3_bucket" "s301" {
-  bucket = "s301"
+resource "aws_s3_bucket" "irelands301" {
+  bucket = "irelands301"
   acl    = "private"
 }
 
@@ -49,9 +49,7 @@ resource "aws_iam_role_policy" "cloudfront_policy" {
         "s3:GetObject"
       ],
       "Resource": [
-        "${aws_s3_bucket.s301.arn}/*",
-        "${aws_s3_bucket.s302.arn}/*",
-        "${aws_s3_bucket.s303.arn}/*"
+        "${aws_s3_bucket.irelands301.arn}/*"
       ]
     }
   ]
@@ -59,11 +57,17 @@ resource "aws_iam_role_policy" "cloudfront_policy" {
 POLICY
 }
 
+# update the below bucket arns in the Resource block of the cloudfront policy
+
+        # "${aws_s3_bucket.s302.arn}/*",  # for s302 bucket
+        # "${aws_s3_bucket.s303.arn}/*"   # for s303 bucket
+
+
 # Create the CloudFront distributions
 resource "aws_cloudfront_distribution" "cf01" {
   origin {
-    domain_name = aws_s3_bucket.s301.bucket_regional_domain_name
-    origin_id   = "s301"
+    domain_name = aws_s3_bucket.irelands301.bucket_regional_domain_name
+    origin_id   = "irelands301"
 
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.oai.cloudfront_access_identity_path

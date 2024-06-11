@@ -1,20 +1,21 @@
 
-
-
-# Create the Redis server
 resource "aws_elasticache_cluster" "redis_server" {
   cluster_id           = "redis-server"
   engine               = "redis"
-  #engine_version    = "6.2.6"
+  engine_version    = var.engine_version_redis
   node_type           = "cache.t3.micro"
   num_cache_nodes     = 1
-  parameter_group_name = "default.redis6.x"
+  #parameter_group_name = "default.redis6.x"
+  parameter_group_name = aws_elasticache_parameter_group.custom_redis_parameters.name
   subnet_group_name    = aws_elasticache_subnet_group.redis_subnet_group.name
   security_group_ids   = [aws_security_group.allow_redis.id]
   tags = {
-    Name = "Redis Server"
+    Name = "qa-redis-server"
   }
 }
+
+
+
 
 # Create the Redis Subnet Group
 resource "aws_elasticache_subnet_group" "redis_subnet_group" {
@@ -54,4 +55,16 @@ resource "aws_security_group" "allow_redis" {
   tags = {
     Name = "allow_redis"
   }
+}
+
+
+resource "aws_elasticache_parameter_group" "custom_redis_parameters" {
+  name   = "custom-redis-parameters"
+  family = "redis6.x"
+
+  parameter {
+    name  = "maxmemory-policy"
+    value = "allkeys-lru"
+  }
+  # Add any other custom parameter configurations as needed
 }

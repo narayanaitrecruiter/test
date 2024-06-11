@@ -14,7 +14,7 @@ resource "aws_launch_template" "ecs_launch_template" {
   name                   = "${var.namespace}_EC2_LaunchTemplate"
   image_id               = data.aws_ssm_parameter.ecs_node_ami.value
   instance_type          = var.instance_type
-  key_name               = "ireland" # Replace with your key pair name
+  key_name               = var.keypair# Replace with your key pair name
   user_data              = base64encode(data.template_file.user_data.rendered)
   vpc_security_group_ids = [aws_security_group.ec2.id]
 

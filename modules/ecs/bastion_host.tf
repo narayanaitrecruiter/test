@@ -33,7 +33,7 @@ resource "aws_instance" "bastion_host" {
   instance_type               = "t3.micro"
   subnet_id                   = var.subnet_ids[0]
   associate_public_ip_address = true
-  key_name                    = "ireland"
+  key_name                    = var.keypair
   vpc_security_group_ids      = [aws_security_group.bastion_host.id]
 
   tags = {

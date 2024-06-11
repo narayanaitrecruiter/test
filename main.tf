@@ -7,8 +7,7 @@
 # You can do or play anything using these modules in the main.tf.
 # this is the folder which you have...
 # i have split the ECS module into ECS and  ecs service. 
-
-
+# for the cloudfront change the bucket name wherever necessary.
 
 module "vpc" {
   source = "./modules/vpc"
@@ -20,6 +19,7 @@ module "ecs-cluster" {
   source     = "./modules/ecs"
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.subnet_ids
+  keypair = "mykeypair"  ##### update this file name without fail.
 }
 
 module "eks" {

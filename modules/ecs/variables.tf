@@ -177,3 +177,8 @@ variable "subnet_ids" {
   type = list(string)
 }
 
+variable "keypair" {
+  description = "Keypair for EC2 instances"
+  type        = string
+  
+}
